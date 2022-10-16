@@ -1,11 +1,8 @@
 import Head from "next/head";
+import Link from 'next/link';
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
+import styles from "./index.module.css";
+import Header from './Header.js'
 
 export default function PracticeInstruction() {
 
@@ -15,18 +12,27 @@ export default function PracticeInstruction() {
   }
 
   return (
-    <div>
+    <main className={styles.main}>
+    <Header headerType="noBack"/>
+    
       <Head>
-        <title>I Statement</title>
+        <title>Dailee: I Statements</title>
         <link rel="icon" href="/dog.png" />
       </Head>
 
-        <h4>Let's Practice #1</h4>
-        <p>Sarah, your roomate, leaves mess lying around in the house everywhere. Instead of blaming *her*, tell her how you feel using the 'I' statement.</p>
         
-        <form onSubmit={onSubmit}>
-          <input type="submit" value="Start Excercise" />
-        </form>
-    </div>
+        <h4>Excercise #1: Annoying Roomate</h4>
+        <p className="instruction">Now that we know what "I" statements are, let’s try to use them in differenet life situations!</p>
+        
+        <Link href="/Practice">
+          <button class= "green-btn">
+          Continue to Excercise
+          </button>
+        </Link>
+        
+    </main>
   );
 }
+
+
+
