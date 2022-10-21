@@ -20,7 +20,8 @@ export default function PracticeInstruction() {
         <link rel="icon" href="/dog.png" />
       </Head>
 
-        
+      <div className="centralContainer">
+
         <h4>Excercise #1: Annoying Roomate</h4>
         <p className="instruction">Now that we know what "I" statements are, let’s try to use them in differenet life situations!</p>
         
@@ -29,7 +30,7 @@ export default function PracticeInstruction() {
           Continue to Excercise
           </button>
         </Link>
-        
+        </div>
     </main>
   );
 }

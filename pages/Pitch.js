@@ -13,9 +13,9 @@ export default function Pitch() {
         <title>Dailee: Learn Social Skills</title>
         <link rel="icon" href="/dog.png" />
       </Head>
-
+      <div className="centralContainer">
         <img className ="logoImg" src= "../logo.png" />
-        <h3 className="logo">Dailee</h3>
+        <p className="logoTitle">Dailee</p>
         <h4 className="pitchDescription">
           The fun way to learn and practice social skills
         </h4>
@@ -25,6 +25,7 @@ export default function Pitch() {
           Get Started
           </button>
         </Link>
+      </div>
         
     </main>
   );

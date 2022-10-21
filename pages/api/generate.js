@@ -16,12 +16,14 @@ export default async function (req, res) {
 }
 
 function generatePrompt(prompt) {
-  const capitalizedPrompt =
-    prompt[0].toUpperCase() + prompt.slice(1).toLowerCase();
-  console.log(capitalizedPrompt);
-  return `Sarah is My's roommate. Complete Sarah's response to My message. If I complain about her behavior without using an 'I' statement, Sarah is responds very aggressively.
-  If I share how I feels using an 'I' statement, Sarah usually apologizes.
 
-Me: ${capitalizedPrompt}
-Sarah: `;
+  // const promptStory = `Sarah is My roommate. If I complain about her behavior without using an 'I' statement, Sarah responds very aggressively.
+  // If I share how I feels using an 'I' statement, Sarah usually apologizes. Complete Sarah's response using short sentences.\n`
+
+  const promptStory = `Sarah is My roommate. She is very rude. Here is our conversation:\n`
+
+  let fullPrompt = promptStory + prompt;
+  console.log(fullPrompt);
+  return fullPrompt;
+
 }

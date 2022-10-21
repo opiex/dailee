@@ -15,27 +15,44 @@ export default function Practice() {
 
   async function onSubmit(event) {
     event.preventDefault();
-    setIsChat(true);
     window.scrollTo(0, document.body.scrollHeight);
     const newPrompt = { sender: "Me", text: textInput };
     updateConversation(newPrompt);
+
+    //Defining conversation to be a string
+    let conversationToSend = 'Me: ' + textInput + '\n' + 'Sarah: ';
+    let pastChat = '';
+    console.log(conversation);
+    for(let i = conversation.length - 1; i >= 0 && i > conversation.length - 10; i--){
+      pastChat = conversation[i].sender + ': ' + conversation[i].text + '\n' + pastChat;
+    }
+
+    conversationToSend = pastChat + conversationToSend;
+
+    //Calling API
     const response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: textInput }),
+      body: JSON.stringify({ prompt: conversationToSend }),
     });
+
+    console.log(conversationToSend);
 
     const data = await response.json();
     setResult(data.result);
 
-    const newResponse = { sender: "Sarah", text: data.result };
+    const newResponse = { sender: "Sarah", text: data.result.slice(2) };
     updateConversation(newResponse);
     setTextInput("");
 
-    console.log(conversation);
+  }
 
+  function firstInteraction(){
+    setIsChat(true);
+    let preface2 = { sender: "Sarah", text: `I'm about to head out. I left some stuff in the living room, don't touch them until I'm back.` };
+    updateConversation(preface2);
   }
 
   
@@ -48,21 +65,18 @@ export default function Practice() {
         </Head>
         <main className={styles.main}>
         <Header />
-  
+        <div className="centralContainer">
+
         <h4 className="greyText">Let's Practice!</h4>
         <h4>Excercise #1: Annoying Roomate</h4>
         <p className="instruction">Sarah, your roomate, leaves mess lying around in the house everywhere. Instead of blaming *her*, tell her how you feel using the 'I' statement.</p>
-  
-          <form onSubmit={onSubmit}>
-          <input
-              type="text"
-              name="prompt"
-              placeholder="Write your text here..."
-              value={textInput}
-              onChange={(e) => setTextInput(e.target.value)}
-            />
-            <input type="submit" value=">" />
-          </form>
+        </div>
+
+        <button class= "green-btn" onClick={firstInteraction}>
+          Begin Excercise
+        </button>
+
+
         </main>
       </div>
     );
@@ -79,6 +93,7 @@ export default function Practice() {
       <main className={styles.main}>
       <Header />
 
+      <div className="chatContainer">
          {conversation.map((item) => (
          <div className = {item.sender === "Me" ? "chatBox chatRight" : "chatBox chatLeft"}>
 
@@ -98,6 +113,7 @@ export default function Practice() {
             />
             <input type="submit" value=">" />
           </form>
+        </div>
       </main>
     </div>
   );
